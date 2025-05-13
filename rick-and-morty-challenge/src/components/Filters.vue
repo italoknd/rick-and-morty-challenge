@@ -31,7 +31,6 @@
 import { ref, watch } from "vue";
 import { getBadgeColor } from "../utils/getBadgeColors";
 import { useRNMStore } from "../store";
-import { useQuasar } from "quasar";
 import notifier from "../utils/quasarNotifier";
 
 //INSTANCES
@@ -39,7 +38,7 @@ const store = useRNMStore();
 
 //MODELS
 let filter = ref<string>("");
-let statuses = ref<string[]>(["Alive", "unknown", "Dead"]);
+let statuses = ref<string[]>(["All Characters", "Alive", "unknown", "Dead"]);
 
 //WATCHERS
 watch(
