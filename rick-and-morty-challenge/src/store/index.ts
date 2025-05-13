@@ -14,6 +14,17 @@ export const useRNMStore = defineStore("RNM", {
     locations: new Object() as LocationResponse,
     episodes: new Object() as EpisodeResponse,
   }),
+  getters: {
+    _characters(): CharacterResponse {
+      return this.characters;
+    },
+    _locations(): LocationResponse {
+      return this.locations;
+    },
+    _episodes(): EpisodeResponse {
+      return this.episodes;
+    },
+  },
   actions: {
     async getCharacters() {
       try {
