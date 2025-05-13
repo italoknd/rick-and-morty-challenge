@@ -9,8 +9,7 @@
         <img
           :src="character.image"
           :alt="`Character: ${character.name}`"
-          :height="200"
-          class="img-cover"
+          class="img-cover h-[200px]"
         />
 
         <q-card-section>
@@ -23,10 +22,15 @@
         </q-card-section>
       </q-card>
     </div>
+    <div class="mt-[45px]" />
     <Pagination
       @changePage="getCharactersByPage"
       class="fixed-bottom row justify-center"
-      :class="$q.dark.isActive ? 'bg-black' : 'bg-white'"
+      :class="
+        $q.dark.isActive
+          ? 'bg-black border-gray border-t-1'
+          : 'bg-white border-gray-300 border-t-2'
+      "
     />
   </div>
 </template>
