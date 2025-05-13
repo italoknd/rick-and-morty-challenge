@@ -18,6 +18,21 @@ export const getCharacters = async (): Promise<CharacterResponse> => {
   }
 };
 
+export const getCharactersByPage = async (
+  page: string
+): Promise<CharacterResponse> => {
+  try {
+    const { data } = await http.get(`/character?page=${page}`);
+    return data;
+  } catch (error: unknown) {
+    const genericError: string = "Falha ao buscar personagens.";
+    if (axios.isAxiosError(error)) {
+      throw new Error(`${genericError}: ${error.message}`);
+    }
+    throw new Error(genericError);
+  }
+};
+
 export const getLocations = async (): Promise<LocationResponse> => {
   try {
     const { data } = await http.get("/location");
