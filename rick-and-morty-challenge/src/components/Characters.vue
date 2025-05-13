@@ -23,18 +23,24 @@
         </q-card-section>
       </q-card>
     </div>
-    <Pagination @changePage="getCharactersByPage" />
+    <Pagination
+      @changePage="getCharactersByPage"
+      class="fixed-bottom row justify-center"
+      :class="$q.dark.isActive ? 'bg-black' : 'bg-white'"
+    />
   </div>
 </template>
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useRNMStore } from "../store/index";
 import { storeToRefs } from "pinia";
+import { useQuasar } from "quasar";
 
 onMounted(() => getCharacters());
 
 //INSTANCES
 const store = useRNMStore();
+const $q = useQuasar();
 
 //MODELS
 const { _characters } = storeToRefs(store);
