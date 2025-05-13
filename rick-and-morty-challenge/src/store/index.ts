@@ -40,6 +40,15 @@ export const useRNMStore = defineStore("RNM", {
         console.error("Error fetching characters:", error);
       }
     },
+    async getCharactersByPage(payload: string) {
+      try {
+        const data = await service.getCharactersByPage(payload);
+        this.characters = data.results;
+        this.infos = data.info;
+      } catch (error) {
+        console.error("Error fetching characters by page:", error);
+      }
+    },
     async getLocations() {
       try {
         const data = await service.getLocations();
