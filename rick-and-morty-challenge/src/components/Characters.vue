@@ -1,7 +1,7 @@
 <template>
   <div class="row q-col-gutter-md q-pa-md">
     <div
-      v-for="(character, index) in _characters.results"
+      v-for="(character, index) in _characters"
       :key="index"
       class="col-12 col-sm-6 col-md-4 col-lg-3"
     >
@@ -16,13 +16,14 @@
         <q-card-section>
           <div class="text-h6">{{ character.name }}</div>
           <div class="text-subtitle2">
-            <q-badge :color="getBadgeColor(character.status)">
+            <q-badge :color="getBadgeColor(character.status)" class="q-pa-xs">
               {{ character.status }}
             </q-badge>
           </div>
         </q-card-section>
       </q-card>
     </div>
+    <Pagination />
   </div>
 </template>
 <script setup lang="ts">

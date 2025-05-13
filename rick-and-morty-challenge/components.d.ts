@@ -9,10 +9,12 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Characters: typeof import('./src/components/Characters.vue')['default']
+    Pagination: typeof import('./src/components/Pagination.vue')['default']
     QBadge: typeof import('quasar')['QBadge']
     QCard: typeof import('quasar')['QCard']
     QCardSection: typeof import('quasar')['QCardSection']
     QImg: typeof import('quasar')['QImg']
+    QPagination: typeof import('quasar')['QPagination']
     QParallax: typeof import('quasar')['QParallax']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
