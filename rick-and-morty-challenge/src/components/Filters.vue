@@ -27,10 +27,38 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { getBadgeColor } from "../utils/getBadgeColors";
+import { useRNMStore } from "../store";
+import { useQuasar } from "quasar";
+import notifier from "../utils/quasarNotifier";
+import { Notify } from "quasar";
+
+//INSTANCES
+const store = useRNMStore();
+const $q = useQuasar();
 
 //MODELS
 let filter = ref<string>("");
 let statuses = ref<string[]>(["Alive", "unknown", "Dead"]);
+
+//WATCHERS
+watch(
+  () => filter.value,
+  (val) => filterCharacters(val)
+);
+
+//REQUESTS
+const filterCharacters = async (character: string) => {
+  try {
+    await store.filterCharacters(character);
+  } catch (error) {
+    filter.value = "";
+
+    notifier.methods.showErrorNotification(
+      "Oops... Parece que não existe nenhum personagem com esse nome"
+    );
+    console.error("Error filtering characters:", error);
+  }
+};
 </script>
