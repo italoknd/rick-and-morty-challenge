@@ -76,6 +76,7 @@ export const useRNMStore = defineStore("RNM", {
         }
       } catch (error) {
         console.error("Error filtering characters:", error);
+        throw new Error("Error filtering characters");
       }
     },
   },
