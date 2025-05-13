@@ -23,7 +23,7 @@
         </q-card-section>
       </q-card>
     </div>
-    <Pagination />
+    <Pagination @changePage="getCharactersByPage" />
   </div>
 </template>
 <script setup lang="ts">
@@ -34,20 +34,29 @@ import { storeToRefs } from "pinia";
 onMounted(() => getCharacters());
 
 //INSTANCES
-const RNMStore = useRNMStore();
+const store = useRNMStore();
 
 //MODELS
-const { _characters } = storeToRefs(RNMStore);
+const { _characters } = storeToRefs(store);
 
-//FUNCTIONS
+//REQUESTS
 const getCharacters = async () => {
   try {
-    await RNMStore.getCharacters();
+    await store.getCharacters();
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
 };
 
+const getCharactersByPage = async (page: string) => {
+  try {
+    await store.getCharactersByPage(page);
+  } catch (error) {
+    console.error("Error fetching characters by page:", error);
+  }
+};
+
+//OTRHER FUNCTIONS
 const getBadgeColor = (status: string): string => {
   if (status.includes("Alive")) return "green-7";
   if (status.includes("unknown")) return "grey-9";
