@@ -17,6 +17,7 @@
     <div class="flex gap-2 items-center">
       <q-badge
         :color="getBadgeColor(status)"
+        @click="filterByStatus(status)"
         v-for="(status, index) in statuses"
         :key="index"
         class="q-pa-xs cursor-pointer"
@@ -32,11 +33,9 @@ import { getBadgeColor } from "../utils/getBadgeColors";
 import { useRNMStore } from "../store";
 import { useQuasar } from "quasar";
 import notifier from "../utils/quasarNotifier";
-import { Notify } from "quasar";
 
 //INSTANCES
 const store = useRNMStore();
-const $q = useQuasar();
 
 //MODELS
 let filter = ref<string>("");
@@ -59,6 +58,18 @@ const filterCharacters = async (character: string) => {
       "Oops... Parece que não existe nenhum personagem com esse nome"
     );
     console.error("Error filtering characters:", error);
+  }
+};
+
+const filterByStatus = async (character: string) => {
+  try {
+    await store.filterCharactersByStatus(character.toLowerCase());
+    notifier.methods.showSuccessNotification(
+      "Successo ao listar personagens por status"
+    );
+  } catch (error) {
+    filter.value = "";
+    console.error("Error while filtering characters by status:", error);
   }
 };
 </script>

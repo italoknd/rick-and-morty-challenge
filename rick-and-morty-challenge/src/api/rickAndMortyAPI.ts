@@ -73,3 +73,18 @@ export const filterCharacters = async (
     throw new Error(genericError);
   }
 };
+
+export const filterCharactersByStatus = async (
+  status: string
+): Promise<CharacterResponse> => {
+  try {
+    const { data } = await http.get(`/character/?status=${status}`);
+    return data;
+  } catch (error: unknown) {
+    const genericError: string = "Falha ao filtrar personagens por status.";
+    if (axios.isAxiosError(error)) {
+      throw new Error(`${genericError}: ${error.message}`);
+    }
+    throw new Error(genericError);
+  }
+};

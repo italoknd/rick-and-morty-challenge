@@ -40,6 +40,7 @@ export const useRNMStore = defineStore("RNM", {
         console.error("Error fetching characters:", error);
       }
     },
+
     async getCharactersByPage(payload: string) {
       try {
         const data = await service.getCharactersByPage(payload);
@@ -49,6 +50,7 @@ export const useRNMStore = defineStore("RNM", {
         console.error("Error fetching characters by page:", error);
       }
     },
+
     async getLocations() {
       try {
         const data = await service.getLocations();
@@ -58,6 +60,7 @@ export const useRNMStore = defineStore("RNM", {
         console.error("Error fetching locations:", error);
       }
     },
+
     async getEpisodes() {
       try {
         const data = await service.getEpisodes();
@@ -67,6 +70,7 @@ export const useRNMStore = defineStore("RNM", {
         console.error("Error fetching episodes:", error);
       }
     },
+
     async filterCharacters(payload: string) {
       try {
         const data = await service.filterCharacters(payload);
@@ -77,6 +81,19 @@ export const useRNMStore = defineStore("RNM", {
       } catch (error) {
         console.error("Error filtering characters:", error);
         throw new Error("Error filtering characters");
+      }
+    },
+
+    async filterCharactersByStatus(payload: string) {
+      try {
+        const data = await service.filterCharactersByStatus(payload);
+        if (data.results.length) {
+          this.characters = data.results;
+          this.infos = data.info;
+        }
+      } catch (error) {
+        console.error("Error filtering characters by status:", error);
+        throw new Error("Error filtering characters by status");
       }
     },
   },
