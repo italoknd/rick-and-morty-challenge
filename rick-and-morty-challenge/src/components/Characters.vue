@@ -1,37 +1,39 @@
 <template>
-  <div class="row q-col-gutter-md q-pa-md">
-    <div
-      v-for="(character, index) in _characters"
-      :key="index"
-      class="col-12 col-sm-6 col-md-4 col-lg-3"
-    >
-      <q-card class="hover-card cursor-pointer" flat bordered>
-        <img
-          :src="character.image"
-          :alt="`Character: ${character.name}`"
-          class="img-cover h-[200px]"
-        />
-
-        <q-card-section>
-          <div class="text-h6">{{ character.name }}</div>
-          <div class="text-subtitle2">
-            <q-badge :color="getBadgeColor(character.status)" class="q-pa-xs">
-              {{ character.status }}
-            </q-badge>
-          </div>
-        </q-card-section>
-      </q-card>
+  <div class="q-pa-md">
+    <Filters class="mb-4" />
+    <div class="row q-col-gutter-md">
+      <div
+        v-for="(character, index) in _characters"
+        :key="index"
+        class="col-12 col-sm-6 col-md-4 col-lg-3"
+      >
+        <q-card class="hover-card cursor-pointer" flat bordered>
+          <img
+            :src="character.image"
+            :alt="`Character: ${character.name}`"
+            class="img-cover h-[200px]"
+          />
+          <q-card-section>
+            <div class="text-h6">{{ character.name }}</div>
+            <div class="text-subtitle2">
+              <q-badge :color="getBadgeColor(character.status)" class="q-pa-xs">
+                {{ character.status }}
+              </q-badge>
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="mt-[45px]" />
+      <Pagination
+        @changePage="getCharactersByPage"
+        class="fixed-bottom row justify-center shadow-2"
+        :class="
+          $q.dark.isActive
+            ? 'bg-black border-gray border-t-1'
+            : 'bg-white border-gray-300 border-t-2'
+        "
+      />
     </div>
-    <div class="mt-[45px]" />
-    <Pagination
-      @changePage="getCharactersByPage"
-      class="fixed-bottom row justify-center"
-      :class="
-        $q.dark.isActive
-          ? 'bg-black border-gray border-t-1'
-          : 'bg-white border-gray-300 border-t-2'
-      "
-    />
   </div>
 </template>
 <script setup lang="ts">
@@ -39,6 +41,7 @@ import { onMounted } from "vue";
 import { useRNMStore } from "../store/index";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
+import { getBadgeColor } from "../utils/getBadgeColors";
 
 onMounted(() => getCharacters());
 
@@ -64,13 +67,6 @@ const getCharactersByPage = async (page: string) => {
   } catch (error) {
     console.error("Error fetching characters by page:", error);
   }
-};
-
-//OTRHER FUNCTIONS
-const getBadgeColor = (status: string): string => {
-  if (status.includes("Alive")) return "green-7";
-  if (status.includes("unknown")) return "grey-9";
-  else return "red-9";
 };
 </script>
 <style scoped>

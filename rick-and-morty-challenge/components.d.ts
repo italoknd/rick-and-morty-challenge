@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Characters: typeof import('./src/components/Characters.vue')['default']
+    Filters: typeof import('./src/components/Filters.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     QFooter: typeof import('quasar')['QFooter']
     QHeader: typeof import('quasar')['QHeader']
     QImg: typeof import('quasar')['QImg']
+    QInput: typeof import('quasar')['QInput']
     QLayout: typeof import('quasar')['QLayout']
     QPage: typeof import('quasar')['QPage']
     QPageContainer: typeof import('quasar')['QPageContainer']
