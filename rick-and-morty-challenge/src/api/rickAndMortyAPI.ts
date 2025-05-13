@@ -43,3 +43,18 @@ export const getEpisodes = async (): Promise<EpisodeResponse> => {
     throw new Error(genericError);
   }
 };
+
+export const filterCharacters = async (
+  character: string
+): Promise<CharacterResponse> => {
+  try {
+    const { data } = await http.get(`/character/?name=${character}`);
+    return data;
+  } catch (error: unknown) {
+    const genericError: string = "Falha ao filtrar personagens.";
+    if (axios.isAxiosError(error)) {
+      throw new Error(`${genericError}: ${error.message}`);
+    }
+    throw new Error(genericError);
+  }
+};
