@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Characters: typeof import('./src/components/Characters.vue')['default']
+    QBadge: typeof import('quasar')['QBadge']
     QCard: typeof import('quasar')['QCard']
     QCardSection: typeof import('quasar')['QCardSection']
     QImg: typeof import('quasar')['QImg']

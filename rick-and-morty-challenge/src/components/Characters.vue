@@ -1,12 +1,25 @@
 <template>
   <div class="row q-col-gutter-md q-pa-md">
-    <div v-for="(character, index) in _characters.results" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <div
+      v-for="(character, index) in _characters.results"
+      :key="index"
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+    >
       <q-card class="hover-card cursor-pointer" flat bordered>
-        <img :src="character.image" :alt="`Character: ${character.name}`" :height="200" class="img-cover" />
+        <img
+          :src="character.image"
+          :alt="`Character: ${character.name}`"
+          :height="200"
+          class="img-cover"
+        />
 
         <q-card-section>
           <div class="text-h6">{{ character.name }}</div>
-          <div class="text-subtitle2">{{ character.status }}</div>
+          <div class="text-subtitle2">
+            <q-badge :color="getBadgeColor(character.status)">
+              {{ character.status }}
+            </q-badge>
+          </div>
         </q-card-section>
       </q-card>
     </div>
@@ -32,6 +45,12 @@ const getCharacters = async () => {
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
+};
+
+const getBadgeColor = (status: string): string => {
+  if (status.includes("Alive")) return "green-7";
+  if (status.includes("unknown")) return "grey-9";
+  else return "red-9";
 };
 </script>
 <style scoped>
