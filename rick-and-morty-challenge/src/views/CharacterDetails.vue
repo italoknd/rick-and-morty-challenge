@@ -42,23 +42,43 @@
         label="Episodes"
         :caption="_selectedCharacter.name"
       >
-        <q-card>
-          <q-card-section> Lorem ipsum dolor </q-card-section>
+        <div class="border border-gray-500" />
+        <q-card class="overflow-y-auto h-[calc(100vh-300px)]">
+          <q-card-section v-for="episode in _episodes">
+            <p><strong>EP Name:</strong> {{ episode.name }}</p>
+            <p><strong>Release Date:</strong> {{ episode.air_date }}</p>
+            <p><strong>Season:</strong> {{ episode.episode }}</p>
+            <div class="border border-gray-500" />
+          </q-card-section>
         </q-card>
+        <div class="border border-gray-500" />
       </q-expansion-item>
     </q-list>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRNMStore } from "../store";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+import { onMounted } from "vue";
+
 //INSTANCES
 const store = useRNMStore();
 const router = useRouter();
-const { _selectedCharacter, _infos } = storeToRefs(store);
+const { _selectedCharacter, _infos, _episodes } = storeToRefs(store);
 
-//MODELS
-let expanded = ref<boolean>(false);
+//FUNCTIONS
+onMounted(() => getEpisodes());
+
+const getEpisodes = async () => {
+  try {
+    let URLEps: string[] = [];
+    _selectedCharacter.value.episode.forEach((episode) => {
+      const epNumber = episode.substring(episode.lastIndexOf("/") + 1);
+      URLEps.push(epNumber);
+    });
+
+    await store.getEpisodes(URLEps.join(","));
+  } catch (error) {}
+};
 </script>
