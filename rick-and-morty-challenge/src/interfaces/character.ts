@@ -36,3 +36,9 @@ export interface CharacterResponse {
   };
   results: Character[];
 }
+
+export interface IQueryParams {
+  name: string;
+  status: string;
+  page: string;
+}
