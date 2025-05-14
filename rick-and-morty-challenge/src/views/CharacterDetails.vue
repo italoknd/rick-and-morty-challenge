@@ -1,6 +1,10 @@
 <template>
   <div class="p-4 flex items-center justify-center">
-    <q-card class="my-card w-[500px] h-[calc(100vh-200px)]" flat bordered>
+    <q-card
+      class="my-card w-[500px] h-[calc(100vh-130px)] h-[calc(100vh-100px)]:md"
+      flat
+      bordered
+    >
       <q-img :src="_selectedCharacter.image" />
 
       <q-card-section>
@@ -35,7 +39,10 @@
     </q-card>
 
     <!--EPISODES LIST-->
-    <q-list bordered class="rounded-borders w-[500px] h-[calc(100vh-200px)]">
+    <q-list
+      bordered
+      class="rounded-borders w-[500px] h-[calc(100vh-200px)] mt-5 mt-0:md"
+    >
       <q-expansion-item
         expand-icon-toggle
         expand-separator
