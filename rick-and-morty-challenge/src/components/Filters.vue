@@ -31,10 +31,13 @@
 import { ref, watch } from "vue";
 import { getBadgeColor } from "../utils/getBadgeColors";
 import { useRNMStore } from "../store";
+import { storeToRefs } from "pinia";
+import { IQueryParams } from "@interfaces/character";
 import notifier from "../utils/quasarNotifier";
 
 //INSTANCES
 const store = useRNMStore();
+const { _fullQuery } = storeToRefs(store);
 
 //MODELS
 let filter = ref<string>("");
@@ -49,26 +52,51 @@ watch(
 //REQUESTS
 const filterCharacters = async (character: string) => {
   try {
-    await store.filterCharacters(character);
+    const params = {
+      status: _fullQuery.value.status,
+      name: character.toLowerCase(),
+      page: _fullQuery.value.page,
+    } as IQueryParams;
+
+    await store.updateQueryParams(params);
   } catch (error) {
     filter.value = "";
-
     notifier.methods.showErrorNotification(
       "Oops... Parece que não existe nenhum personagem com esse nome"
     );
     console.error("Error filtering characters:", error);
+  } finally {
   }
 };
 
-const filterByStatus = async (character: string) => {
+const filterByStatus = async (status: string) => {
   try {
-    await store.filterCharactersByStatus(character.toLowerCase());
+    const statusValidated: string = getAllCharacters(status)
+      ? ""
+      : status.toLowerCase();
+
+    const params = {
+      status: statusValidated,
+      name: getAllCharacters(status) ? "" : _fullQuery.value.name,
+      page: _fullQuery.value.page,
+    } as IQueryParams;
+
+    await store.updateQueryParams(params);
     notifier.methods.showSuccessNotification(
       "Successo ao listar personagens por status"
     );
+
+    if (getAllCharacters(status)) {
+      filter.value = "";
+    }
   } catch (error) {
     filter.value = "";
     console.error("Error while filtering characters by status:", error);
   }
+};
+
+//OTHER FUNCTIONS
+const getAllCharacters = (status: string): boolean => {
+  return status.includes("All Characters");
 };
 </script>
