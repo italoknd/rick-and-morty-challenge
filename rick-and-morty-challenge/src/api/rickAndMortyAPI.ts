@@ -1,7 +1,7 @@
 import axios from "axios";
 import { http } from "./index";
 
-import { EpisodeResponse } from "../interfaces/episode";
+import { EpisodeResponse, Episode } from "../interfaces/episode";
 import { CharacterResponse, IQueryParams } from "../interfaces/character";
 import { LocationResponse } from "../interfaces/location";
 
@@ -37,9 +37,9 @@ export const getLocations = async (): Promise<LocationResponse> => {
   }
 };
 
-export const getEpisodes = async (): Promise<EpisodeResponse> => {
+export const getEpisodes = async (eps: string): Promise<Episode[]> => {
   try {
-    const { data } = await http.get("/episode");
+    const { data } = await http.get(`/episode/${eps}`);
     return data;
   } catch (error: unknown) {
     const genericError: string = "Falha ao buscar episódios.";
