@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex items-center justify-center">
+  <div class="mt-5 flex items-center justify-center">
     <q-card
       class="my-card w-[500px] h-[calc(100vh-130px)] h-[calc(100vh-100px)]:md"
       flat
@@ -9,7 +9,7 @@
 
       <q-card-section>
         <div class="text-h5 q-mt-sm q-mb-xs">{{ _selectedCharacter.name }}</div>
-        <div class="text-caption text-grey">
+        <div class="text-caption">
           <p>
             {{ _selectedCharacter.name }} is one of the
             {{ _infos.count }} characters from Rick and Morty.
@@ -31,10 +31,6 @@
           label="Back to Main Menu"
           @click="router.push('/characters')"
         />
-
-        <q-space />
-
-        <q-btn color="grey" round flat dense />
       </q-card-actions>
     </q-card>
 
@@ -43,23 +39,19 @@
       bordered
       class="rounded-borders w-[500px] h-[calc(100vh-130px)] h-[calc(100vh-100px)]:md mt-0 mt-5:md"
     >
-      <q-expansion-item
-        expand-icon-toggle
-        expand-separator
-        label="Episodes with"
-        :caption="_selectedCharacter.name"
-      >
-        <div class="border border-gray-500" />
-        <q-card class="overflow-y-auto h-[calc(100vh-300px)]">
-          <q-card-section v-for="episode in _episodes">
-            <p><strong>EP Name:</strong> {{ episode.name }}</p>
-            <p><strong>Release Date:</strong> {{ episode.air_date }}</p>
-            <p><strong>Season:</strong> {{ episode.episode }}</p>
-            <div class="border border-gray-500" />
-          </q-card-section>
-        </q-card>
-        <div class="border border-gray-500" />
-      </q-expansion-item>
+      <div class="px-2">
+        <h5 class="mt-3">Episodes with</h5>
+        <p>{{ _selectedCharacter.name }}</p>
+      </div>
+      <div class="border border-gray-500" />
+      <q-card class="overflow-y-auto h-[calc(100vh-215px)]">
+        <q-card-section v-for="episode in _episodes">
+          <p><strong>EP Name:</strong> {{ episode.name }}</p>
+          <p><strong>Release Date:</strong> {{ episode.air_date }}</p>
+          <p><strong>Season:</strong> {{ episode.episode }}</p>
+          <div class="border border-gray-500" />
+        </q-card-section>
+      </q-card>
     </q-list>
   </div>
 </template>
