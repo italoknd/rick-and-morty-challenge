@@ -3,7 +3,7 @@
 
 <template>
   <Navbar />
-  <Characters />
+  <RouterView />
 </template>
 
 <style scoped></style>
