@@ -46,7 +46,7 @@
       <q-expansion-item
         expand-icon-toggle
         expand-separator
-        label="Episodes"
+        label="Episodes with"
         :caption="_selectedCharacter.name"
       >
         <div class="border border-gray-500" />
