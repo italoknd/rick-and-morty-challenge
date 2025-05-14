@@ -2,27 +2,18 @@ import axios from "axios";
 import { http } from "./index";
 
 import { EpisodeResponse } from "../interfaces/episode";
-import { CharacterResponse } from "../interfaces/character";
+import { CharacterResponse, IQueryParams } from "../interfaces/character";
 import { LocationResponse } from "../interfaces/location";
 
-export const getCharacters = async (): Promise<CharacterResponse> => {
-  try {
-    const { data } = await http.get("/character");
-    return data;
-  } catch (error: unknown) {
-    const genericError: string = "Falha ao buscar personagens.";
-    if (axios.isAxiosError(error)) {
-      throw new Error(`${genericError}: ${error.message}`);
-    }
-    throw new Error(genericError);
-  }
-};
-
-export const getCharactersByPage = async (
-  page: string
+export const getCharacters = async (
+  query: IQueryParams
 ): Promise<CharacterResponse> => {
   try {
-    const { data } = await http.get(`/character?page=${page}`);
+    const fullQuery = `?name=${query.name ?? ""}&status=${
+      query.status ?? ""
+    }&page=${query.page ?? ""}`;
+
+    const { data } = await http.get(`/character/${fullQuery}`);
     return data;
   } catch (error: unknown) {
     const genericError: string = "Falha ao buscar personagens.";
@@ -52,52 +43,6 @@ export const getEpisodes = async (): Promise<EpisodeResponse> => {
     return data;
   } catch (error: unknown) {
     const genericError: string = "Falha ao buscar episódios.";
-    if (axios.isAxiosError(error)) {
-      throw new Error(`${genericError}: ${error.message}`);
-    }
-    throw new Error(genericError);
-  }
-};
-
-export const filterCharacters = async (
-  character: string
-): Promise<CharacterResponse> => {
-  try {
-    const { data } = await http.get(`/character/?name=${character}`);
-    return data;
-  } catch (error: unknown) {
-    const genericError: string = "Falha ao filtrar personagens.";
-    if (axios.isAxiosError(error)) {
-      throw new Error(`${genericError}: ${error.message}`);
-    }
-    throw new Error(genericError);
-  }
-};
-
-export const filterCharactersByStatus = async (
-  status: string
-): Promise<CharacterResponse> => {
-  try {
-    const { data } = await http.get(`/character/?status=${status}`);
-    return data;
-  } catch (error: unknown) {
-    const genericError: string = "Falha ao filtrar personagens por status.";
-    if (axios.isAxiosError(error)) {
-      throw new Error(`${genericError}: ${error.message}`);
-    }
-    throw new Error(genericError);
-  }
-};
-
-export const filterCharactersWithMultipleParams = async (
-  params: string
-): Promise<CharacterResponse> => {
-  try {
-    const { data } = await http.get(`/character/?`);
-    return data;
-  } catch (error: unknown) {
-    const genericError: string =
-      "Falha ao filtrar personagens por multiplos parametros.";
     if (axios.isAxiosError(error)) {
       throw new Error(`${genericError}: ${error.message}`);
     }
