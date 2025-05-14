@@ -8,7 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Characters: typeof import('./src/components/Characters.vue')['default']
     Filters: typeof import('./src/components/Filters.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
@@ -25,8 +24,6 @@ declare module 'vue' {
     QLayout: typeof import('quasar')['QLayout']
     QList: typeof import('quasar')['QList']
     QPagination: typeof import('quasar')['QPagination']
-    QSeparator: typeof import('quasar')['QSeparator']
-    QSlideTransition: typeof import('quasar')['QSlideTransition']
     QSpace: typeof import('quasar')['QSpace']
     QToggle: typeof import('quasar')['QToggle']
     QToolbar: typeof import('quasar')['QToolbar']

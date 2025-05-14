@@ -41,7 +41,7 @@
     <!--EPISODES LIST-->
     <q-list
       bordered
-      class="rounded-borders w-[500px] h-[calc(100vh-200px)] mt-5 mt-0:md"
+      class="rounded-borders w-[500px] h-[calc(100vh-130px)] h-[calc(100vh-100px)]:md mt-0 mt-5:md"
     >
       <q-expansion-item
         expand-icon-toggle
