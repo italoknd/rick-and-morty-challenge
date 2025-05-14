@@ -25,7 +25,6 @@
       </div>
       <div class="mt-[45px]" />
       <Pagination
-        @changePage="getCharactersByPage"
         class="fixed-bottom row justify-center shadow-2"
         :class="
           $q.dark.isActive
@@ -38,7 +37,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { useRNMStore } from "../store/index";
+import { useRNMStore } from "../store";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 import { getBadgeColor } from "../utils/getBadgeColors";
@@ -58,14 +57,6 @@ const getCharacters = async () => {
     await store.getCharacters();
   } catch (error) {
     console.error("Error fetching characters:", error);
-  }
-};
-
-const getCharactersByPage = async (page: string) => {
-  try {
-    await store.getCharactersByPage(page);
-  } catch (error) {
-    console.error("Error fetching characters by page:", error);
   }
 };
 </script>
