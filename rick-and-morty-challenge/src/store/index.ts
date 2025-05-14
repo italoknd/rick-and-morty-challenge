@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 
 // Interfaces
+import { Character, IQueryParams } from "@interfaces/character";
 import { IGeneralInfos } from "@interfaces/index";
-import { Character } from "@interfaces/character";
 import { Episode } from "@interfaces/episode";
 import { Location } from "@interfaces/location";
 
@@ -15,6 +15,7 @@ export const useRNMStore = defineStore("RNM", {
     locations: new Object() as Location[],
     episodes: new Object() as Episode[],
     infos: new Object() as IGeneralInfos,
+    fullQuery: new Object() as IQueryParams,
   }),
   getters: {
     _characters(): Character[] {
@@ -29,25 +30,24 @@ export const useRNMStore = defineStore("RNM", {
     _infos(): IGeneralInfos {
       return this.infos;
     },
+    _fullQuery(): IQueryParams {
+      return this.fullQuery;
+    },
   },
   actions: {
+    async updateQueryParams(payload: IQueryParams) {
+      this.fullQuery = payload;
+
+      await this.getCharacters();
+    },
+
     async getCharacters() {
       try {
-        const data = await service.getCharacters();
+        const data = await service.getCharacters(this._fullQuery);
         this.characters = data.results;
         this.infos = data.info;
       } catch (error) {
         console.error("Error fetching characters:", error);
-      }
-    },
-
-    async getCharactersByPage(payload: string) {
-      try {
-        const data = await service.getCharactersByPage(payload);
-        this.characters = data.results;
-        this.infos = data.info;
-      } catch (error) {
-        console.error("Error fetching characters by page:", error);
       }
     },
 
@@ -68,32 +68,6 @@ export const useRNMStore = defineStore("RNM", {
         this.infos = data.info;
       } catch (error) {
         console.error("Error fetching episodes:", error);
-      }
-    },
-
-    async filterCharacters(payload: string) {
-      try {
-        const data = await service.filterCharacters(payload);
-        if (data.results.length) {
-          this.characters = data.results;
-          this.infos = data.info;
-        }
-      } catch (error) {
-        console.error("Error filtering characters:", error);
-        throw new Error("Error filtering characters");
-      }
-    },
-
-    async filterCharactersByStatus(payload: string) {
-      try {
-        const data = await service.filterCharactersByStatus(payload);
-        if (data.results.length) {
-          this.characters = data.results;
-          this.infos = data.info;
-        }
-      } catch (error) {
-        console.error("Error filtering characters by status:", error);
-        throw new Error("Error filtering characters by status");
       }
     },
   },
