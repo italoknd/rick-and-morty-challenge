@@ -16,26 +16,28 @@ import { ref, watch } from "vue";
 import { useRNMStore } from "../store";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
+import { IQueryParams } from "../interfaces/character";
 
 //INSTANCES
 const store = useRNMStore();
-const { _infos } = storeToRefs(store);
+const { _infos, _fullQuery } = storeToRefs(store);
 const $q = useQuasar();
 
 //MODELS
 let current = ref<number>(1);
 
-//EMITS
-const emit = defineEmits<{
-  (e: "changePage", page: string): void;
-}>();
-
 //WATCHERS
 watch(
   () => current.value,
-  (val) => changePage(val)
-);
+  (val) => {
+    const params = {
+      status: _fullQuery.value.status,
+      name: _fullQuery.value.name,
+      page: String(val),
+    } as IQueryParams;
 
-//FUNCTIONS
-const changePage = (page: number) => emit("changePage", String(page));
+    store.updateQueryParams(params);
+    store.getCharacters();
+  }
+);
 </script>
