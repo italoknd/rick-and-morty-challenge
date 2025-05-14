@@ -7,7 +7,12 @@
         :key="index"
         class="col-12 col-sm-6 col-md-4 col-lg-3"
       >
-        <q-card class="hover-card cursor-pointer" flat bordered>
+        <q-card
+          @click="showCharacterDetails(character)"
+          class="hover-card cursor-pointer"
+          flat
+          bordered
+        >
           <img
             :src="character.image"
             :alt="`Character: ${character.name}`"
@@ -41,11 +46,14 @@ import { useRNMStore } from "../store";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
 import { getBadgeColor } from "../utils/getBadgeColors";
+import { useRouter } from "vue-router";
+import { Character } from "@interfaces/character";
 
 onMounted(() => getCharacters());
 
 //INSTANCES
 const store = useRNMStore();
+const router = useRouter();
 const $q = useQuasar();
 
 //MODELS
@@ -58,6 +66,11 @@ const getCharacters = async () => {
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
+};
+
+const showCharacterDetails = (character: Character) => {
+  store.getSelectedCharacter(character);
+  router.push("/character-detail");
 };
 </script>
 <style scoped>
