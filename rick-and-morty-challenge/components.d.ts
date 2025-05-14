@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    EpisodesList: typeof import('./src/components/EpisodesList.vue')['default']
     Filters: typeof import('./src/components/Filters.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
@@ -17,14 +18,12 @@ declare module 'vue' {
     QCard: typeof import('quasar')['QCard']
     QCardActions: typeof import('quasar')['QCardActions']
     QCardSection: typeof import('quasar')['QCardSection']
-    QExpansionItem: typeof import('quasar')['QExpansionItem']
     QHeader: typeof import('quasar')['QHeader']
     QImg: typeof import('quasar')['QImg']
     QInput: typeof import('quasar')['QInput']
     QLayout: typeof import('quasar')['QLayout']
     QList: typeof import('quasar')['QList']
     QPagination: typeof import('quasar')['QPagination']
-    QSpace: typeof import('quasar')['QSpace']
     QToggle: typeof import('quasar')['QToggle']
     QToolbar: typeof import('quasar')['QToolbar']
     RouterLink: typeof import('vue-router')['RouterLink']
