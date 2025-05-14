@@ -14,7 +14,9 @@
         </q-avatar>
       </template>
     </q-input>
-    <div class="flex gap-2 items-center">
+    <div
+      class="flex gap-2 items-center mt-4 md:mt-0"
+    >
       <q-badge
         :color="getBadgeColor(status)"
         @click="filterByStatus(status)"
