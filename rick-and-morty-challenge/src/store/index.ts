@@ -11,6 +11,7 @@ import * as service from "../api/rickAndMortyAPI";
 //RNM = Rick and Morty
 export const useRNMStore = defineStore("RNM", {
   state: () => ({
+    selectedCharacter: new Object() as Character,
     characters: new Array() as Character[],
     locations: new Object() as Location[],
     episodes: new Object() as Episode[],
@@ -33,8 +34,15 @@ export const useRNMStore = defineStore("RNM", {
     _fullQuery(): IQueryParams {
       return this.fullQuery;
     },
+    _selectedCharacter(): Character {
+      return this.selectedCharacter;
+    },
   },
   actions: {
+    getSelectedCharacter(payload: Character) {
+      this.selectedCharacter = payload;
+    },
+
     async updateQueryParams(payload: IQueryParams) {
       this.fullQuery = payload;
 
