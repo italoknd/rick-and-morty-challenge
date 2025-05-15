@@ -40,7 +40,8 @@ export const getLocations = async (): Promise<LocationResponse> => {
 export const getEpisodes = async (eps: string): Promise<Episode[]> => {
   try {
     const { data } = await http.get(`/episode/${eps}`);
-    return data;
+
+    return Array.isArray(data) ? data : [data];
   } catch (error: unknown) {
     const genericError: string = "Falha ao buscar episódios.";
     if (axios.isAxiosError(error)) {
