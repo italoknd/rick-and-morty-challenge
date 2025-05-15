@@ -6,7 +6,7 @@ import { IGeneralInfos } from "@interfaces/index";
 import { Episode } from "@interfaces/episode";
 import { Location } from "@interfaces/location";
 
-import * as service from "../api/APIRestful";
+// import * as service from "../api/APIRestful"; //unused module
 import * as GraphQLService from "../api/APIGraphQL";
 
 //RNM = Rick and Morty
@@ -61,16 +61,6 @@ export const useRNMStore = defineStore("RNM", {
         this.infos = data.info;
       } catch (error) {
         console.error("Error fetching characters:", error);
-      }
-    },
-
-    async getLocations() {
-      try {
-        const data = await service.getLocations();
-        this.locations = data.results;
-        this.infos = data.info;
-      } catch (error) {
-        console.error("Error fetching locations:", error);
       }
     },
 
