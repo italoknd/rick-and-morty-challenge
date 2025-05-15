@@ -8,7 +8,9 @@
           width="300"
           style="object-fit: contain"
         />
-        <q-toggle v-model="isDarkMode" color="green" />
+        <q-toggle v-model="isDarkMode" color="green">
+          <strong>{{ isDarkMode ? "Dark Mode" : "Light Mode" }}</strong>
+        </q-toggle>
       </q-toolbar>
     </q-header>
   </q-layout>
