@@ -29,13 +29,13 @@
         </q-card>
       </div>
       <div v-if="!_characters.length" class="m-auto">
-        <h4>No data found</h4>
+        <h5 class="text-center">No data found</h5>
         <img
-          src="https://i.pinimg.com/originals/98/29/21/9829215db6f9210c0ae4e318e854cb1f.png"
+          src="../../public/Rick_And_Morty_Portal.png"
           alt=""
           width="200"
           height="200"
-          class="rotation mt-4"
+          class="rotation mt-4 border-none"
         />
       </div>
       <Pagination
