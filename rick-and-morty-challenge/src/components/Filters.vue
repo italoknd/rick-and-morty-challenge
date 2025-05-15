@@ -1,14 +1,11 @@
 <template>
   <div class="flex justify-between items-center">
-    <q-input v-model="filter" dense color="green-4" label="Filter by character">
-      <template v-slot:append>
-        <q-avatar>
-          <img
-            src="https://i.pinimg.com/originals/98/29/21/9829215db6f9210c0ae4e318e854cb1f.png"
-          />
-        </q-avatar>
-      </template>
-    </q-input>
+    <q-input
+      v-model="filter"
+      dense
+      color="green-4"
+      label="Filter by character"
+    />
     <div class="flex gap-2 items-center mt-4 md:mt-0">
       <q-badge
         :color="getBadgeColor(status)"
