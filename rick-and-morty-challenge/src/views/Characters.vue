@@ -2,24 +2,11 @@
   <div class="q-pa-md">
     <Filters class="mb-4" />
     <div class="row q-col-gutter-md ">
-      <div
-        v-for="(character, index) in _characters"
-        :key="index"
-        class="col-6 col-sm-4 col-md-3 col-lg-2"
-      >
-        <q-card
-          @click="showCharacterDetails(character)"
-          class="hover-card cursor-pointer"
-          flat
-          bordered
-        >
-          <img
-            :src="character.image"
-            :alt="`Character: ${character.name}`"
-            class="img-cover h-[200px]"
-          />
+      <div v-for="(character, index) in _characters" :key="index" class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <q-card @click="showCharacterDetails(character)" class="hover-card cursor-pointer" flat bordered>
+          <img :src="character.image" :alt="`Character: ${character.name}`" class="img-cover h-[200px]" />
           <q-card-section>
-            <div class="text-h6">{{ character.name }}</div>
+            <div class="text-h6 ellipsis">{{ character.name }}</div>
             <div class="text-subtitle2">
               <q-badge :color="getBadgeColor(character.status)" class="q-pa-xs">
                 {{ character.status }}
@@ -29,14 +16,11 @@
         </q-card>
       </div>
       <div class="mt-[45px]" />
-      <Pagination
-        class="fixed-bottom row justify-center shadow-2"
-        :class="
+      <Pagination class="fixed-bottom row justify-center shadow-2" :class="
           $q.dark.isActive
             ? 'bg-black border-gray border-t-1'
             : 'bg-white border-gray-300 border-t-2'
-        "
-      />
+        " />
     </div>
   </div>
 </template>
