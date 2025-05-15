@@ -77,4 +77,5 @@ export const useRNMStore = defineStore("RNM", {
       }
     },
   },
+  persist: true,
 });

@@ -6,7 +6,7 @@
     </div>
     <div class="border border-gray-500" />
     <q-card
-      class="overflow-y-auto md:h-[calc(100vh-186px)] h-[calc(100vh-295px)]"
+      class="overflow-y-auto h-[calc(100vh-295px)]"
     >
       <q-card-section v-for="episode in _episodes">
         <p><strong>EP Name:</strong> {{ episode.name }}</p>
