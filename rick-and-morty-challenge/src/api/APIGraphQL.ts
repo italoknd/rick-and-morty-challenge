@@ -19,8 +19,6 @@ export const getCharacters = async (
           info {
             count
             pages
-            next
-            prev
           }
           results {
             id

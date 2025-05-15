@@ -40,5 +40,5 @@ export interface CharacterResponse {
 export interface IQueryParams {
   name: string;
   status: string;
-  page: string;
+  page: number;
 }

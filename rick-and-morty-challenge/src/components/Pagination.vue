@@ -33,7 +33,7 @@ watch(
     const params = {
       status: _fullQuery.value.status,
       name: _fullQuery.value.name,
-      page: String(val),
+      page: val,
     } as IQueryParams;
 
     store.updateQueryParams(params);
