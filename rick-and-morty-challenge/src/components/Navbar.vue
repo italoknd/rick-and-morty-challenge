@@ -21,7 +21,7 @@ import { useQuasar } from "quasar";
 const $q = useQuasar();
 
 //MODELS
-let isDarkMode = ref<boolean>(false);
+let isDarkMode = ref<boolean>(true);
 
 //WATCHERS
 watch(
