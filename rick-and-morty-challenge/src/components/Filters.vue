@@ -58,7 +58,7 @@ const filterCharacters = async (character: string) => {
     const params = {
       status: _fullQuery.value.status,
       name: character.toLowerCase(),
-      page: _fullQuery.value.page,
+      page: 1,
     } as IQueryParams;
 
     await store.updateQueryParams(params);
@@ -82,7 +82,7 @@ const filterByStatus = async (status: string) => {
     const params = {
       status: statusValidated,
       name: getAllCharacters(status) ? "" : _fullQuery.value.name,
-      page: _fullQuery.value.page,
+      page: 1,
     } as IQueryParams;
 
     await store.updateQueryParams(params);
