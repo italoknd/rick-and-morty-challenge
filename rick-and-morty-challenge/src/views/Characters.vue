@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <Filters class="mb-4" />
-    <div class="row q-col-gutter-md ">
+    <div class="row q-col-gutter-md mb-[60px]">
       <div v-for="(character, index) in _characters" :key="index" class="col-6 col-sm-4 col-md-3 col-lg-2">
         <q-card @click="showCharacterDetails(character)" class="hover-card cursor-pointer" flat bordered>
           <img :src="character.image" :alt="`Character: ${character.name}`" class="img-cover h-[200px]" />
@@ -15,7 +15,6 @@
           </q-card-section>
         </q-card>
       </div>
-      <div class="mt-[45px]" />
       <Pagination class="fixed-bottom row justify-center shadow-2" :class="
           $q.dark.isActive
             ? 'bg-black border-gray border-t-1'
