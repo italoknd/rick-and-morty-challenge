@@ -1,7 +1,7 @@
 import axios from "axios";
 import { http } from "./index";
 
-import { EpisodeResponse, Episode } from "../interfaces/episode";
+import { Episode } from "../interfaces/episode";
 import { CharacterResponse, IQueryParams } from "../interfaces/character";
 import { LocationResponse } from "../interfaces/location";
 

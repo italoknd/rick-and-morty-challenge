@@ -6,7 +6,8 @@ import { IGeneralInfos } from "@interfaces/index";
 import { Episode } from "@interfaces/episode";
 import { Location } from "@interfaces/location";
 
-import * as service from "../api/rickAndMortyAPI";
+import * as service from "../api/APIRestful";
+import * as GraphQLService from "../api/APIGraphQL";
 
 //RNM = Rick and Morty
 export const useRNMStore = defineStore("RNM", {
@@ -51,7 +52,7 @@ export const useRNMStore = defineStore("RNM", {
 
     async getCharacters() {
       try {
-        const data = await service.getCharacters(this._fullQuery);
+        const data = await GraphQLService.getCharacters(this._fullQuery);
         this.characters = data.results;
         this.infos = data.info;
       } catch (error) {
