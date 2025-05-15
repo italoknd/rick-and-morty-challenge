@@ -27,6 +27,9 @@ export const getCharacters = async (
             species
             gender
             image
+            origin {
+              name
+            }
           }
         }
       }

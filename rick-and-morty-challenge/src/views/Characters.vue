@@ -48,7 +48,6 @@ import { useQuasar } from "quasar";
 import { getBadgeColor } from "../utils/getBadgeColors";
 import { useRouter } from "vue-router";
 import { Character } from "@interfaces/character";
-import { IQueryParams } from "@interfaces/character";
 
 onMounted(() => getCharacters());
 
@@ -70,8 +69,8 @@ const getCharacters = async () => {
 };
 
 const showCharacterDetails = (character: Character) => {
-  store.resetParams();
   store.getSelectedCharacter(character);
+  store.resetParams();
   router.push("/character-detail");
 };
 </script>
