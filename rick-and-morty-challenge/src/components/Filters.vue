@@ -15,7 +15,12 @@
         @click="filterByStatus(status)"
         v-for="(status, index) in statuses"
         :key="index"
-        class="q-pa-xs cursor-pointer"
+        class="cursor-pointer q-pa-xs"
+        :class="
+          selectedStatus.includes(status)
+            ? `border ${$q.dark.isActive ? 'border-white' : 'border-gray-500'}`
+            : ''
+        "
       >
         {{ status }}
       </q-badge>
@@ -28,15 +33,18 @@ import { getBadgeColor } from "../utils/getBadgeColors";
 import { useRNMStore } from "../store";
 import { storeToRefs } from "pinia";
 import { IQueryParams } from "@interfaces/character";
+import { useQuasar } from "quasar";
 import notifier from "../utils/quasarNotifier";
 
 //INSTANCES
+const $q = useQuasar();
 const store = useRNMStore();
 const { _fullQuery } = storeToRefs(store);
 
 //MODELS
 let filter = ref<string>("");
 let statuses = ref<string[]>(["All Characters", "Alive", "unknown", "Dead"]);
+let selectedStatus = ref<string>("");
 
 //WATCHERS
 watch(
@@ -66,6 +74,7 @@ const filterCharacters = async (character: string) => {
 
 const filterByStatus = async (status: string) => {
   try {
+    selectedStatus.value = status;
     const statusValidated: string = getAllCharacters(status)
       ? ""
       : status.toLowerCase();
