@@ -18,13 +18,13 @@ onMounted(() => getEpisodes());
 
 const getEpisodes = async () => {
   try {
-    let URLEps: string[] = [];
+    let URLEps: number[] = [];
     _selectedCharacter.value.episode.forEach((episode) => {
-      const epNumber = episode.substring(episode.lastIndexOf("/") + 1);
-      URLEps.push(epNumber);
+      URLEps.push(Number(episode.id));
     });
-
-    await store.getEpisodes(URLEps.join(","));
-  } catch (error) {}
+    await store.getEpisodes(URLEps);
+  } catch (error) {
+    console.error("error while listing episodes", error);
+  }
 };
 </script>

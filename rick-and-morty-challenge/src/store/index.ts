@@ -74,9 +74,10 @@ export const useRNMStore = defineStore("RNM", {
       }
     },
 
-    async getEpisodes(eps: string) {
+    async getEpisodes(eps: number[]) {
       try {
-        this.episodes = await service.getEpisodes(eps);
+        const res = await GraphQLService.getEpisodes(eps);
+        this.episodes = res.data.episodesByIds;
       } catch (error) {
         console.error("Error fetching episodes:", error);
       }

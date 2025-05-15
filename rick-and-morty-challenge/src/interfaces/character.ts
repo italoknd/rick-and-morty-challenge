@@ -9,7 +9,7 @@ export interface Location {
 }
 
 export interface Episode {
-  url: string;
+  id: string;
 }
 
 export interface Character {
@@ -22,7 +22,7 @@ export interface Character {
   origin: Origin;
   location: Location;
   image: string;
-  episode: string[];
+  episode: Episode[];
   url: string;
   created: string;
 }

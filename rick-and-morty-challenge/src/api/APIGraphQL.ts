@@ -1,9 +1,7 @@
 import axios from "axios";
-import { http } from "./index";
-
-import { Episode } from "../interfaces/episode";
+import { EpisodeResponse } from "../interfaces/episode";
 import { CharacterResponse, IQueryParams } from "../interfaces/character";
-import { LocationResponse } from "../interfaces/location";
+
 const endpoint = import.meta.env.VITE_API_RICK_MORTY_GRAPHQL;
 
 export const getCharacters = async (
@@ -29,6 +27,9 @@ export const getCharacters = async (
             image
             origin {
               name
+            }
+            episode {
+              id
             }
           }
         }
@@ -62,24 +63,28 @@ export const getCharacters = async (
   }
 };
 
-export const getLocations = async (): Promise<LocationResponse> => {
+export const getEpisodes = async (ids: number[]): Promise<EpisodeResponse> => {
   try {
-    const { data } = await http.get("/location");
-    return data;
-  } catch (error: unknown) {
-    const genericError: string = "Falha ao buscar locais.";
-    if (axios.isAxiosError(error)) {
-      throw new Error(`${genericError}: ${error.message}`);
+    const gqlQuery = `
+    query ($ids: [ID!]!) {
+      episodesByIds(ids: $ids) {
+        name
+        air_date
+        episode
+      }
     }
-    throw new Error(genericError);
-  }
-};
+  `;
 
-export const getEpisodes = async (eps: string): Promise<Episode[]> => {
-  try {
-    const { data } = await http.get(`/episode/${eps}`);
+    const variables = {
+      ids,
+    };
 
-    return Array.isArray(data) ? data : [data];
+    const { data } = await axios.post(endpoint, {
+      query: gqlQuery,
+      variables,
+    });
+
+    return data;
   } catch (error: unknown) {
     const genericError: string = "Falha ao buscar episódios.";
     if (axios.isAxiosError(error)) {
