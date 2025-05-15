@@ -1,14 +1,13 @@
 <template>
-  <q-list
-    bordered
-    class="rounded-borders w-[500px] h-[calc(100vh-130px)] h-[calc(100vh-100px)]:md mt-0 mt-5:md"
-  >
+  <q-list bordered class="rounded-borders w-[500px]">
     <div class="px-2">
       <h5 class="mt-3">Episodes with</h5>
       <p>{{ _selectedCharacter.name }}</p>
     </div>
     <div class="border border-gray-500" />
-    <q-card class="overflow-y-auto h-[calc(100vh-215px)]">
+    <q-card
+      class="overflow-y-auto md:h-[calc(100vh-186px)] h-[calc(100vh-295px)]"
+    >
       <q-card-section v-for="episode in _episodes">
         <p><strong>EP Name:</strong> {{ episode.name }}</p>
         <p><strong>Release Date:</strong> {{ episode.air_date }}</p>
