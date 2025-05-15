@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5 px-5 flex items-center justify-center">
+  <div class="my-5 px-5 flex items-center justify-center lg:gap-4">
     <CharacterPresentation class="lg:mb-0 mb-4" />
     <EpisodesList />
   </div>
