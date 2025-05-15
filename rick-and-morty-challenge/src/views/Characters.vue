@@ -1,11 +1,11 @@
 <template>
   <div class="q-pa-md">
     <Filters class="mb-4" />
-    <div class="row q-col-gutter-md">
+    <div class="row q-col-gutter-md ">
       <div
         v-for="(character, index) in _characters"
         :key="index"
-        class="col-12 col-sm-6 col-md-4 col-lg-3"
+        class="col-6 col-sm-4 col-md-3 col-lg-2"
       >
         <q-card
           @click="showCharacterDetails(character)"
