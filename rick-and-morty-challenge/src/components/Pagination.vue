@@ -1,6 +1,6 @@
 <template>
   <q-pagination
-    v-model="current"
+    v-model="currentPage"
     :max="_infos.pages ?? 0"
     input
     :input-class="$q.dark.isActive ? 'text-green' : 'text-blue'"
@@ -12,7 +12,7 @@
   />
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { useRNMStore } from "../store";
 import { storeToRefs } from "pinia";
 import { useQuasar } from "quasar";
@@ -24,11 +24,18 @@ const { _infos, _fullQuery } = storeToRefs(store);
 const $q = useQuasar();
 
 //MODELS
-let current = ref<number>(1);
+let currentPage = ref<number>(1);
+
+//FUNCTIONS
+onMounted(() => {
+  if (_fullQuery.value.page > 1) {
+    currentPage.value = _fullQuery.value.page;
+  }
+});
 
 //WATCHERS
 watch(
-  () => current.value,
+  () => currentPage.value,
   (val) => {
     const params = {
       status: _fullQuery.value.status,
