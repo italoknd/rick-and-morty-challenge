@@ -44,6 +44,10 @@ export const useRNMStore = defineStore("RNM", {
       this.selectedCharacter = payload;
     },
 
+    resetParams() {
+      this.fullQuery = new Object() as IQueryParams;
+    },
+
     async updateQueryParams(payload: IQueryParams) {
       this.fullQuery = payload;
 
